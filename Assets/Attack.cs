@@ -19,7 +19,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookDirection = new Vector3(aimInput.x, 90, aimInput.y);
+        Vector3 lookDirection = new Vector3(aimInput.x, 0, aimInput.y);
         Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
 
         float step = rotateSpeed * Time.deltaTime;
