@@ -30,6 +30,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SwitchWeapon",
+                    "type": "Button",
+                    "id": "b4e86e2c-033f-4766-88de-c95ce6f569b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -47,11 +56,11 @@
                 },
                 {
                     "name": "",
-                    "id": "5a150c7d-50fd-4560-8a55-67cc6175d984",
+                    "id": "35881de8-8026-452c-808f-f9ffa48523bb",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Player3",
+                    "groups": "Player2",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -59,21 +68,21 @@
                 {
                     "name": "",
                     "id": "41e6d0c6-c5db-4549-b968-d7633869c1e7",
-                    "path": "<Gamepad>/leftStick",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Player2",
+                    "groups": "Player1",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "bbbaad3e-88fd-458d-8a26-0dcf75bfbc92",
-                    "path": "<Gamepad>/leftStick",
+                    "id": "3522972f-2414-4acd-83d8-864d17329f6b",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Player4",
+                    "groups": "Player2",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -84,6 +93,17 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
+                    "groups": "Player1",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9225560f-52b7-412f-b3b3-2ccb71627084",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
                     "groups": "Player2",
                     "action": "Attack",
                     "isComposite": false,
@@ -91,12 +111,23 @@
                 },
                 {
                     "name": "",
-                    "id": "0d9213cc-36d8-48ec-9ce8-e0df5832fc17",
-                    "path": "<Gamepad>/rightTrigger",
+                    "id": "74bc3139-5ff8-4ec3-b53f-ba978bc196e2",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Player4",
-                    "action": "Attack",
+                    "groups": "Player1",
+                    "action": "SwitchWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0fa789c2-35c1-4778-82e8-ad2ed275f535",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -118,28 +149,6 @@
         {
             "name": "Player2",
             "bindingGroup": "Player2",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Player3",
-            "bindingGroup": "Player3",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Player4",
-            "bindingGroup": "Player4",
             "devices": [
                 {
                     "devicePath": "<Gamepad>",

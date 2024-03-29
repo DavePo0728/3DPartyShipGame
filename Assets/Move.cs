@@ -10,7 +10,8 @@ public class Move : MonoBehaviour
     [SerializeField]
     float speed;
     Vector2 movementInput;
-    // Start is called before the first frame update
+    [SerializeField]
+    GameManager shipHp;    // Start is called before the first frame update
     void Start()
     {
         
@@ -18,7 +19,7 @@ public class Move : MonoBehaviour
     public void GetMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-        Debug.Log(movementInput.x + "+" + movementInput.y);
+        //Debug.Log(movementInput.x + "+" + movementInput.y);
     }
     void Sprint()
     {
@@ -33,4 +34,24 @@ public class Move : MonoBehaviour
 
         shipOne.MovePosition(shipOne.position + movement* speed * Time.deltaTime);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (gameObject.tag == "Player")
+        {
+            if (other.gameObject.tag == "Bullet1")
+            {
+                shipHp.GetHit(this.gameObject,10);
+                Destroy(other.gameObject);
+            }
+        }
+        if (gameObject.tag == "Player2")
+        {
+            if (other.gameObject.tag == "Bullet")
+            {
+                shipHp.GetHit(this.gameObject,10);
+                Destroy(other.gameObject);
+            }
+        }
+    }
 }
+
