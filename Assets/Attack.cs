@@ -16,6 +16,8 @@ public class Attack : MonoBehaviour
     GameObject canon;
     [SerializeField]
     GameObject specialWeapon;
+    [SerializeField]
+    GameObject currentSpecialWeapon;
     bool canonAttack =true;
     private float timeBetweenShots;
     private float timeSinceLastShot = 0.0f;
@@ -72,7 +74,7 @@ public class Attack : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
             float step = rotateSpeed * Time.deltaTime;
 
-            Debug.Log(lookRotation.y);
+            //Debug.Log(lookRotation.y);
             if (lookRotation.y >= 0.5 || lookRotation.y <= -0.5)
                 turretBase.transform.rotation = Quaternion.RotateTowards(lookRotation, transform.rotation, step);
             
@@ -91,7 +93,7 @@ public class Attack : MonoBehaviour
                 turretBase = specialWeapon;
                 canonAttack = false;
             }
-            Debug.Log(turretBase.name);
+            //Debug.Log(turretBase.name);
         }
     }
     public void CanonAttack(InputAction.CallbackContext context)
@@ -106,6 +108,8 @@ public class Attack : MonoBehaviour
     }
     public void SpecialWeaponAttack(InputAction.CallbackContext context)
     {
-        if (canonAttack==false) { }
+        if (canonAttack==false&&context.performed) { 
+        
+        }
     }
 }

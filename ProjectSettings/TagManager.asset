@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Bullet1
   - Equipment
+  - torpedo
   layers:
   - Default
   - TransparentFX
@@ -15,9 +16,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - box
+  - ship
+  - boarder
   - 
   - 
   - 

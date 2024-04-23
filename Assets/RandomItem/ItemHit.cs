@@ -10,6 +10,7 @@ public class ItemHit : MonoBehaviour
     bool destroyByShip;
     [SerializeField]
     float itemHp;
+    float currentHp;
     [SerializeField]
     float damage;
     GameObject gameManager;
@@ -18,32 +19,60 @@ public class ItemHit : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager");
         shipHp = gameManager.GetComponent<GameManager>();
+        currentHp = itemHp;
+    }
+    void getShoot(float damage)
+    {
+        currentHp -= damage;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (canbeDestroy == true)
         {
             //Debug.Log(other.tag);
-            if (other.tag == "Bullet" || other.tag == "Bullet1")
+            if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet1")
             {
+                BulletMove bulletScript = other.gameObject.GetComponent<BulletMove>();
+                getShoot(bulletScript.damage);
+                Destroy(other.gameObject);
+            }
+        }
+        if (canbeDestroy == false)
+        {
+            if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet1")
+            {
+                Destroy(other.gameObject);
+            }
+        }
+        if (currentHp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (this.gameObject.name== "Wood(Clone)") {
+            Debug.Log(this.gameObject.name + "hit" + other.gameObject.name);
+        }
+        if (destroyByShip == true && this.gameObject.tag != "Equipment")
+        {
+            //Debug.Log(other.tag);
+            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
+            {
+                shipHp.GetHit(other.gameObject, damage);
                 Destroy(this.gameObject);
             }
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-        if (destroyByShip == true&&this.gameObject.tag!="Equipment")
+        if (destroyByShip == true && this.gameObject.tag == "Equipment")
         {
-            //Debug.Log(other.tag);
-            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Player2")
+            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
             {
-                shipHp.GetHit(collision.gameObject,damage);
                 Destroy(this.gameObject);
             }
-        }else if(destroyByShip == true && this.gameObject.tag == "Equipment")
-        {
-            Destroy(this.gameObject);
+            if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet1")
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
 }

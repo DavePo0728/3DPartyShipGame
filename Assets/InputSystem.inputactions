@@ -30,12 +30,30 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SwitchWeapon",
                     "type": "Button",
                     "id": "b4e86e2c-033f-4766-88de-c95ce6f569b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "9a143e48-7094-4bf8-9d40-e4fdff74206a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "1ee67fa4-abf5-4808-ad33-6da83aed4f2f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -130,6 +148,28 @@
                     "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76a2ed8d-7752-4cdf-aa7d-482be59a6d36",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1;Player2",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "833cae61-7a18-493f-a549-5d0c0469c240",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1;Player2",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -143,6 +183,11 @@
                     "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
                 }
             ]
         },
@@ -153,6 +198,11 @@
                 {
                     "devicePath": "<Gamepad>",
                     "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
                     "isOR": false
                 }
             ]

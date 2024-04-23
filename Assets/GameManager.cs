@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    bool gameOver = false;
     float Maxhp = 1000;
     [SerializeField]
     float player1_currenthp, player2_currenthp;
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         player1_currenthp = Maxhp;
         player2_currenthp = Maxhp;
         // p1HpSlider.fillAmount = player1_currenthp;
@@ -25,27 +28,33 @@ public class GameManager : MonoBehaviour
     {
 
     }
+    public void RestartGame(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("re");
+            SceneManager.LoadScene("Game");
+        }
+    }
     public void GetHit(GameObject target, float damage)
     {
         if (target.tag == "Player")
         {
-            //Debug.Log("hit: " + target.tag);
             player1_currenthp -= damage;
-            //p1HpSlider.value = player1_currenthp;
         }
         if (target.tag == "Player2")
         {
-            //Debug.Log("hit: " + target.tag);
             player2_currenthp -= damage;
-            //p2HpSlider.value = player2_currenthp;
         }
         if (player1_currenthp <= 0 )
         {
-            Destroy(target.gameObject);
+            gameOver = true;
+            Time.timeScale = 0;
         }
         if(player2_currenthp <= 0)
         {
-            Destroy(target.gameObject);
+            gameOver = true;
+            Time.timeScale = 0;
         }
         UpdateHpUI();
     }

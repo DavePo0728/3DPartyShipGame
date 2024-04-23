@@ -19,7 +19,9 @@ public class RandomItemManager : MonoBehaviour
     [SerializeField]
     private int totalSpawnQuantity;
     private Dictionary<GameObject, int> itemWeights = new Dictionary<GameObject, int>();
-
+    int lastSpawnPointNum = -1;
+    int spawnPointNum;
+    GameObject spawnPoint;
     void Start()
     {
         // Initialize the dictionary with prefabs and their corresponding weights
@@ -53,10 +55,10 @@ public class RandomItemManager : MonoBehaviour
         {
             GameObject itemToSpawn = GetRandomGameObject();
             Instantiate(itemToSpawn, GetRandomPosition(), Quaternion.identity);
-            Debug.Log(timeInterval);
+            //Debug.Log(timeInterval);
             yield return new WaitForSeconds(timeInterval);
         }
-        totalSpawnQuantity = 30;
+        totalSpawnQuantity = 22;
         itemWeights[RandomItem[0]] = 26;
         itemWeights[RandomItem[1]] = 10;
         itemWeights[RandomItem[2]] = 10;
@@ -84,18 +86,17 @@ public class RandomItemManager : MonoBehaviour
         {
             GameObject itemToSpawn = GetRandomGameObject();
             Instantiate(itemToSpawn, GetRandomPosition(), Quaternion.identity);
-            Debug.Log(timeInterval);
             yield return new WaitForSeconds(timeInterval);
         }
-        totalSpawnQuantity = 60;
+        totalSpawnQuantity = 45;
         itemWeights[RandomItem[0]] = 26;
-        itemWeights[RandomItem[1]] = 10;
-        itemWeights[RandomItem[2]] = 10;
+        itemWeights[RandomItem[1]] = 15;
+        itemWeights[RandomItem[2]] = 15;
         itemWeights[RandomItem[3]] = 7;
         itemWeights[RandomItem[4]] = 7;
         itemWeights[RandomItem[5]] = 13;
         itemWeights[RandomItem[6]] = 7;
-        itemWeights[RandomItem[7]] = 20;
+        itemWeights[RandomItem[7]] = 10;
         RandomItemMove[0].flowSpeed = 1.0f;
         RandomItemMove[1].flowSpeed = 1.0f;
         RandomItemMove[2].flowSpeed = 1.0f;
@@ -142,7 +143,13 @@ public class RandomItemManager : MonoBehaviour
 
     Vector3 GetRandomPosition()
     {
-        GameObject spawnPoint = RandomItemSpawnPoint[Random.Range(0, 13)];
+        do
+        {
+            spawnPointNum = Random.Range(0, 14); 
+        } while (spawnPointNum == lastSpawnPointNum);
+
+        lastSpawnPointNum = spawnPointNum;
+        spawnPoint = RandomItemSpawnPoint[spawnPointNum];
         return spawnPoint.transform.position;
     }
 }

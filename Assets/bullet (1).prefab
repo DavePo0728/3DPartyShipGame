@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 5
+  damage: 10
 --- !u!136 &5793735434071227794
 CapsuleCollider:
   m_ObjectHideFlags: 0

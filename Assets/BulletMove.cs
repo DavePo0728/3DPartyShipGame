@@ -6,6 +6,7 @@ public class BulletMove : MonoBehaviour
 {
     [SerializeField]
     float bulletSpeed;
+    public float damage;
     float lifeTime=3.0f;
     // Start is called before the first frame update
     void Start()
