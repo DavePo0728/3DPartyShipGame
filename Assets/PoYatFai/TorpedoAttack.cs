@@ -5,19 +5,13 @@ using UnityEngine;
 public class TorpedoAttack : MonoBehaviour
 {
     [SerializeField]
-    GameObject torpedo1, torpedo2, torpedo3;
-    [SerializeField]
-    GameObject torpedo1Spawnpoint, torpedo2Spawnpoint, torpedo3Spawnpoint;
+    float bulletSpeed;
+    public float damage;
+    float lifeTime = 3.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(Vector3.up * bulletSpeed * Time.deltaTime);
+        Destroy(this.gameObject, lifeTime);
     }
 }

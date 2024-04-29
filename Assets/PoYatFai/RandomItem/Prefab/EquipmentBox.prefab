@@ -112,10 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f1c7e49dd098f4f88f7b5e4871dc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowSpeed: 0.8
-  boarderMask:
-    serializedVersion: 2
-    m_Bits: 256
+  flowSpeed: 1
 --- !u!54 &5434410552672291318
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -144,7 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666414d97ec962d41818f94c10e19113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
   canbeDestroy: 0
   destroyByShip: 1
   itemHp: 100
   damage: 0
+  hpImage: {fileID: 0}

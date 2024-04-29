@@ -8,11 +8,6 @@ public class BulletMove : MonoBehaviour
     float bulletSpeed;
     public float damage;
     float lifeTime=3.0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

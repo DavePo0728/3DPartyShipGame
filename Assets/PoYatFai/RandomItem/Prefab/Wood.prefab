@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f1c7e49dd098f4f88f7b5e4871dc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowSpeed: 0.7
+  flowSpeed: 1
 --- !u!114 &8819393259079680196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666414d97ec962d41818f94c10e19113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
   canbeDestroy: 1
   destroyByShip: 1
   itemHp: 20

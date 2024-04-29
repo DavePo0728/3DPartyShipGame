@@ -14,19 +14,30 @@ public class Attack : MonoBehaviour
     GameObject turretBase;
     [SerializeField]
     GameObject canon;
-    [SerializeField]
-    GameObject specialWeapon;
-    [SerializeField]
-    GameObject currentSpecialWeapon;
     bool canonAttack =true;
     private float timeBetweenShots;
     private float timeSinceLastShot = 0.0f;
-
-
     [SerializeField]
     float rotateSpeed;
     Vector2 aimInput;
     bool rtDown = false;
+
+    [SerializeField]
+    GameObject specialWeapon;
+    [SerializeField]
+    GameObject currentSpecialWeapon;
+
+    [SerializeField]
+    GameObject TorpedoShootingPoint;
+    [SerializeField]
+    GameObject[] specialWeaponList;
+    [SerializeField]
+    GameObject[] TorpedoList;
+    [SerializeField]
+    int torpedoRemain=3;
+    
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +88,7 @@ public class Attack : MonoBehaviour
             //Debug.Log(lookRotation.y);
             if (lookRotation.y >= 0.5 || lookRotation.y <= -0.5)
                 turretBase.transform.rotation = Quaternion.RotateTowards(lookRotation, transform.rotation, step);
-            
+            TorpedoShootingPoint.transform.rotation = turretBase.transform.rotation;
         }
         
     }
@@ -108,8 +119,15 @@ public class Attack : MonoBehaviour
     }
     public void SpecialWeaponAttack(InputAction.CallbackContext context)
     {
-        if (canonAttack==false&&context.performed) { 
-        
+        if (canonAttack==false&&context.performed&&currentSpecialWeapon == specialWeaponList[3]) {
+            if (torpedoRemain > 0)
+            {
+                TorpedoList[torpedoRemain - 1].transform.position = TorpedoShootingPoint.transform.position;
+                TorpedoList[torpedoRemain - 1].transform.parent = null;
+                TorpedoAttack tp=TorpedoList[torpedoRemain - 1].GetComponent<TorpedoAttack>();
+                tp.enabled = true;
+                torpedoRemain--;
+            }
         }
     }
 }

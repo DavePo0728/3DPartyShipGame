@@ -141,7 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666414d97ec962d41818f94c10e19113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
   canbeDestroy: 0
   destroyByShip: 0
   itemHp: 100
   damage: 0
+  hpImage: {fileID: 0}

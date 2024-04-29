@@ -354,8 +354,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.28717804, y: 0.3339356, z: 0.84995294}
-  m_Center: {x: 0.09417692, y: 0.018856581, z: 0.06657038}
+  m_Size: {x: 0.28717804, y: 0.3729159, z: 0.84995294}
+  m_Center: {x: 0.09417692, y: 0.03834674, z: 0.06657038}
 --- !u!65 &191922490417051264
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -367,8 +367,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.20764202, y: 0.3339356, z: 0.15262985}
-  m_Center: {x: -0.15330428, y: 0.018856637, z: -0.07141057}
+  m_Size: {x: 0.20764202, y: 0.37548494, z: 0.15262985}
+  m_Center: {x: -0.15330428, y: 0.039631315, z: -0.07141057}
 --- !u!54 &4758173304506217310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f1c7e49dd098f4f88f7b5e4871dc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowSpeed: 0.7
+  flowSpeed: 1
 --- !u!114 &9041855725161828114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666414d97ec962d41818f94c10e19113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 0}
   canbeDestroy: 1
   destroyByShip: 1
   itemHp: 30
