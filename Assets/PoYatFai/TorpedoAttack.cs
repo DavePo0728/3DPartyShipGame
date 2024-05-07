@@ -7,7 +7,7 @@ public class TorpedoAttack : MonoBehaviour
     [SerializeField]
     float bulletSpeed;
     public float damage;
-    float lifeTime = 3.0f;
+    float lifeTime = 10.0f;
 
     void Update()
     {

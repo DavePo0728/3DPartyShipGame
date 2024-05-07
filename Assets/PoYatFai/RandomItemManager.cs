@@ -31,7 +31,7 @@ public class RandomItemManager : MonoBehaviour
         itemWeights.Add(RandomItem[4], 5);
         itemWeights.Add(RandomItem[5], 5);
         itemWeights.Add(RandomItem[6], 5);
-        itemWeights.Add(RandomItem[7], 20);
+        //itemWeights.Add(RandomItem[7], 20);
         for (int i =0; i < RandomItem.Count; i++)
         {
             RandomItemMove[i] = RandomItem[i].GetComponent<ItemMove>();
@@ -63,7 +63,7 @@ public class RandomItemManager : MonoBehaviour
         itemWeights[RandomItem[4]] = 7;
         itemWeights[RandomItem[5]] = 13;
         itemWeights[RandomItem[6]] = 7;
-        itemWeights[RandomItem[7]] = 20;
+        //itemWeights[RandomItem[7]] = 20;
         RandomItemMove[0].flowSpeed = 0.8f;
         RandomItemMove[1].flowSpeed = 0.8f;
         RandomItemMove[2].flowSpeed = 0.8f;
@@ -71,7 +71,7 @@ public class RandomItemManager : MonoBehaviour
         RandomItemMove[4].flowSpeed = 0.6f;
         RandomItemMove[5].flowSpeed = 0.7f;
         RandomItemMove[6].flowSpeed = 0.7f;
-        RandomItemMove[7].flowSpeed = 0.8f;
+        //RandomItemMove[7].flowSpeed = 0.8f;
         StartCoroutine(SpawnWaveTwo(totalSpawnQuantity, 15f));
     }
     IEnumerator SpawnWaveTwo(int quantity, float duration)
@@ -93,7 +93,7 @@ public class RandomItemManager : MonoBehaviour
         itemWeights[RandomItem[4]] = 7;
         itemWeights[RandomItem[5]] = 13;
         itemWeights[RandomItem[6]] = 7;
-        itemWeights[RandomItem[7]] = 10;
+       // itemWeights[RandomItem[7]] = 10;
         RandomItemMove[0].flowSpeed = 1.0f;
         RandomItemMove[1].flowSpeed = 1.0f;
         RandomItemMove[2].flowSpeed = 1.0f;
@@ -101,7 +101,7 @@ public class RandomItemManager : MonoBehaviour
         RandomItemMove[4].flowSpeed = 0.8f;
         RandomItemMove[5].flowSpeed = 0.9f;
         RandomItemMove[6].flowSpeed = 0.9f;
-        RandomItemMove[7].flowSpeed = 1.0f;
+       // RandomItemMove[7].flowSpeed = 1.0f;
         StartCoroutine(SpawnLastWave(totalSpawnQuantity, 30f));
     }
     IEnumerator SpawnLastWave(int quantity, float duration)
@@ -113,7 +113,7 @@ public class RandomItemManager : MonoBehaviour
         {
             GameObject itemToSpawn = GetRandomGameObject();
             Instantiate(itemToSpawn, GetRandomPosition(), Quaternion.identity);
-            Debug.Log(timeInterval);
+            //Debug.Log(timeInterval);
             yield return new WaitForSeconds(timeInterval);
         }
     }

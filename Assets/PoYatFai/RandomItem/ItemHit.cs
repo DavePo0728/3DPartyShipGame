@@ -12,6 +12,8 @@ public class ItemHit : MonoBehaviour
     [SerializeField]
     bool destroyByShip;
     [SerializeField]
+    bool haveEnergy;
+    [SerializeField]
     float itemHp;
     float currentHp;
     [SerializeField]
@@ -21,6 +23,8 @@ public class ItemHit : MonoBehaviour
     GameObject hpUI;
     [SerializeField]
     Image hpImage;
+    [SerializeField]
+    GameObject explosionEffect;
 
     private void Start()
     {
@@ -50,13 +54,21 @@ public class ItemHit : MonoBehaviour
     {
         if (canbeDestroy == true)
         {
-            //Debug.Log(other.tag);
             if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet1")
             {
                 BulletMove bulletScript = other.gameObject.GetComponent<BulletMove>();
                 getShoot(bulletScript.damage);
                 hpUI.SetActive(true);
                 UpdateUI();
+                if (currentHp <= 0)
+                {
+                    if (haveEnergy == true)
+                    {
+                        shipHp.GetEnergy(other.gameObject);
+                        //Debug.Log("add");
+                    }
+                    Destroy(this.gameObject);
+                }
                 Destroy(other.gameObject);
             }
         }
@@ -67,10 +79,7 @@ public class ItemHit : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
-        if (currentHp <= 0)
-        {
-            Destroy(this.gameObject);
-        }
+        
     }
     private void OnCollisionEnter(Collision other)
     {

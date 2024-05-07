@@ -9,7 +9,7 @@ public class Move : MonoBehaviour
     Rigidbody shipOne;
     [SerializeField]
     float speed;
-    float maxVelocity = 5f;
+    float maxVelocity = 4f;
     Vector2 movementInput;
     [SerializeField]
     GameManager shipHp;
@@ -27,6 +27,10 @@ public class Move : MonoBehaviour
     bool isTouching = false;
     [SerializeField]
     float pushForce;
+
+    [Header("Energy")]
+    [SerializeField]
+    GameObject energyBar;
     void Start()
     {
         PlayerCollider = gameObject.GetComponent<Collider>();
@@ -58,12 +62,12 @@ public class Move : MonoBehaviour
     IEnumerator OnTouch()
     {
         isTouching = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         isTouching = false;
     }
     IEnumerator OnDash()
     {
-        Debug.Log("dash");
+       // Debug.Log("dash");
         canDash = false;
         isDashing = true;
         shipOne.AddForce(shipOne.velocity*dashForce,ForceMode.Impulse);
@@ -80,11 +84,11 @@ public class Move : MonoBehaviour
             StartCoroutine(OnTouch());
             if (isTouching)
             {
-                Debug.Log("touch");
                 Rigidbody othership;
                 othership = collision.gameObject.GetComponent<Rigidbody>();
                 Vector3 temp = Vector3.ClampMagnitude(shipOne.velocity * pushForce,pushForce);
                 othership.AddForce(temp,ForceMode.Impulse);
+                Instantiate(energyBar, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
             }
         }
     }
@@ -139,5 +143,6 @@ public class Move : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         Physics.IgnoreLayerCollision(7, 6, false);
     }
+    
 }
 
