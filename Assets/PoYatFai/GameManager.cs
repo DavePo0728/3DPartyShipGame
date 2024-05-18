@@ -13,20 +13,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Image p1HpUI, p2HpUI;
 
-    float MaxEnergy = 100;
-    [SerializeField]
-    float player1_currentEnergy, player2_currentEnergy;
-    [SerializeField]
-    Image p1EnergyUI, p2EnergyUI;
+    
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
         player1_currentHp = Maxhp;
         player2_currentHp = Maxhp;
-        player1_currentEnergy = 0;
-        player2_currentEnergy = 0;
-        UpdateEnergyUI();
+
+        
         UpdateHpUI();
     }
     private void Update()
@@ -63,20 +58,7 @@ public class GameManager : MonoBehaviour
         }
         UpdateHpUI();
     }
-    public void GetEnergy(GameObject target)
-    {
-        if (target.tag == "Bullet")
-        {
-            player1_currentEnergy += 5;
-            
-        }
-        if (target.tag == "Bullet1")
-        {
-            player2_currentEnergy += 5;
-            //Debug.Log("p2 :"+player2_currentEnergy);
-        }
-        UpdateEnergyUI();
-    }
+    
     private void UpdateHpUI()
     {
         float p1Hp = player1_currentHp / Maxhp;
@@ -84,14 +66,7 @@ public class GameManager : MonoBehaviour
         p1HpUI.fillAmount = p1Hp;
         p2HpUI.fillAmount = p2Hp;
     }
-    private void UpdateEnergyUI()
-    {
-        float p1Energy = player1_currentEnergy / MaxEnergy;
-        Debug.Log("p1 :" + p1Energy);
-        float p2Energy = player2_currentEnergy / MaxEnergy;
-        p1EnergyUI.fillAmount = p1Energy;
-        p2EnergyUI.fillAmount = p2Energy;
-    } 
+   
 
 }
     

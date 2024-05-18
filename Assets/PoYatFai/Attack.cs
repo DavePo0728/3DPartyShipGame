@@ -21,6 +21,10 @@ public class Attack : MonoBehaviour
     float rotateSpeed;
     Vector2 aimInput;
     bool rtDown = false;
+    //[HideInInspector]
+    public bool superAttack;
+    [SerializeField]
+    GameObject superBulletPrefab;
 
     [SerializeField]
     GameObject specialWeapon;
@@ -35,8 +39,8 @@ public class Attack : MonoBehaviour
     GameObject[] TorpedoList;
     [SerializeField]
     int torpedoRemain=3;
-    
 
+    AudioSource gunShot;
 
 
     // Start is called before the first frame update
@@ -44,6 +48,8 @@ public class Attack : MonoBehaviour
     {
         timeBetweenShots = 1 / (210 / 60.0f);
         turretBase = canon;
+        gunShot = gameObject.GetComponent<AudioSource>();
+        superAttack = false;
     }
 
     // Update is called once per frame
@@ -60,7 +66,9 @@ public class Attack : MonoBehaviour
         {
             //Quaternion bulletRotation = new Quaternion(transform.rotation.x -90, transform.rotation.y, transform.rotation.z,transform.rotation.w);
             Instantiate(canonBulletPrefab, barrel.transform.position, transform.rotation);
-            
+            if (superAttack)
+                Instantiate(superBulletPrefab, barrel.transform.position, transform.rotation);
+            gunShot.Play();
             timeSinceLastShot = 0.0f;
         }
     }

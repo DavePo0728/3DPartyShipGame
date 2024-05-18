@@ -6,7 +6,7 @@ public class BulletMove : MonoBehaviour
 {
     [SerializeField]
     float bulletSpeed;
-    public float damage;
+    public float damage =10;
     float lifeTime=3.0f;
 
     // Update is called once per frame

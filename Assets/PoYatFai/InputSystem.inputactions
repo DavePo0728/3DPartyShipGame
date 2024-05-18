@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "1ee67fa4-abf5-4808-ad33-6da83aed4f2f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Aim",
                     "type": "Value",
                     "id": "68977428-cdc8-42a4-b8f5-32f67abf49ad",
@@ -45,15 +54,6 @@
                     "name": "Restart",
                     "type": "Button",
                     "id": "9a143e48-7094-4bf8-9d40-e4fdff74206a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "1ee67fa4-abf5-4808-ad33-6da83aed4f2f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -171,17 +171,6 @@
                 },
                 {
                     "name": "",
-                    "id": "833cae61-7a18-493f-a549-5d0c0469c240",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Player1;Player2",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "72eb1d50-65fe-4994-ba07-70b55a9af53e",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -199,6 +188,17 @@
                     "processors": "",
                     "groups": "Player2",
                     "action": "SpecialAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "833cae61-7a18-493f-a549-5d0c0469c240",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1;Player2",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -9,7 +9,7 @@ public class RandomItemManager : MonoBehaviour
     TMP_Text WaveText;
     [SerializeField]
     TMP_Text TimerText;
-    float timer = 0;
+    float timer = 60;
     [SerializeField]
     List<GameObject> RandomItemSpawnPoint;
     [SerializeField]
@@ -40,8 +40,8 @@ public class RandomItemManager : MonoBehaviour
     }
     private void Update()
     {
-        timer += Time.deltaTime;
-        TimerText.text = ((int)timer).ToString();
+        timer -= Time.deltaTime;
+        TimerText.text = string.Format("{0:F2}", timer);
     }
     IEnumerator SpawnWaveOne(int quantity, float duration)
     {

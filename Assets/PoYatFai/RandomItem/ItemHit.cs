@@ -25,13 +25,26 @@ public class ItemHit : MonoBehaviour
     Image hpImage;
     [SerializeField]
     GameObject explosionEffect;
+    GameObject RedShip, BlueShip;
+    RedShipEnergyManager RedEnergyManager;
+    BlueShipEnergyManager BlueEnergyManager;
+
+    [SerializeField]
+    AudioSource BreakEffect;
 
     private void Start()
     {
-        
+        RedShip = GameObject.FindGameObjectWithTag("Player");
+        BlueShip = GameObject.FindGameObjectWithTag("Player2");
+        RedEnergyManager = RedShip.GetComponent<RedShipEnergyManager>();
+        BlueEnergyManager = BlueShip.GetComponent<BlueShipEnergyManager>();
         gameManager = GameObject.Find("GameManager");
         shipHp = gameManager.GetComponent<GameManager>();
         currentHp = itemHp;
+        if (gameObject.tag== "Bomb")
+        {
+            BreakEffect = gameObject.GetComponent<AudioSource>();
+        }
 
         if(canbeDestroy == true)
         {
@@ -54,7 +67,37 @@ public class ItemHit : MonoBehaviour
     {
         if (canbeDestroy == true)
         {
-            if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet1")
+            if (other.gameObject.tag == "Bullet")
+            {
+                BulletMove bulletScript = other.gameObject.GetComponent<BulletMove>();
+                getShoot(bulletScript.damage);
+                hpUI.SetActive(true);
+                UpdateUI();
+                if (currentHp <= 0)
+                {
+                    
+                    if (BreakEffect != null)
+                    {
+                        BreakEffect.Play();
+                        Collider hitbox = gameObject.GetComponent<Collider>();
+                        GameObject child = gameObject.transform.GetChild(0).gameObject;
+                        GameObject child1 = gameObject.transform.GetChild(1).gameObject;
+                        child.SetActive(false);
+                        child1.SetActive(false);
+                        hitbox.enabled = false;
+                    }
+                    Invoke("InvokeDestroy", 0.6f);
+                    if (haveEnergy == true)
+                    {
+                        RedEnergyManager.GetEnergy(other.gameObject);
+                        Debug.Log("getEnergy");
+                    }
+                   
+                }
+                Destroy(other.gameObject);
+                
+            }
+            if(other.gameObject.tag == "Bullet1")
             {
                 BulletMove bulletScript = other.gameObject.GetComponent<BulletMove>();
                 getShoot(bulletScript.damage);
@@ -64,11 +107,26 @@ public class ItemHit : MonoBehaviour
                 {
                     if (haveEnergy == true)
                     {
-                        shipHp.GetEnergy(other.gameObject);
-                        //Debug.Log("add");
+                        BlueEnergyManager.GetEnergy(other.gameObject);
                     }
-                    Destroy(this.gameObject);
+                    if (BreakEffect != null)
+                    {
+                        BreakEffect.Play();
+                        Collider hitbox = gameObject.GetComponent<Collider>();
+                        GameObject child = gameObject.transform.GetChild(0).gameObject;
+                        GameObject child1 = gameObject.transform.GetChild(1).gameObject;
+                        child.SetActive(false);
+                        child1.SetActive(false);
+                        hitbox.enabled = false;
+                    }
+                    Invoke("InvokeDestroy", 0.6f);
+                    if (haveEnergy == true)
+                    {
+                        BlueEnergyManager.GetEnergy(other.gameObject);
+                        Debug.Log("getEnergy");
+                    }
                 }
+                
                 Destroy(other.gameObject);
             }
         }
@@ -102,6 +160,10 @@ public class ItemHit : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
+    }
+    void InvokeDestroy()
+    {
+        Destroy(this.gameObject);
     }
     void UpdateUI()
     {

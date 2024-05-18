@@ -7,8 +7,10 @@ TagManager:
   - Player2
   - Bullet
   - Bullet1
-  - Equipment
   - torpedo
+  - EnergyBar
+  - Equipment
+  - Bomb
   layers:
   - Default
   - TransparentFX

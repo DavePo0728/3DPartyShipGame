@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemMove : MonoBehaviour
 {
     public float flowSpeed;
-    float lifeTime = 10.0f;
+    float lifeTime = 15.0f;
     float timer;
     [SerializeField]
     // Start is called before the first frame update

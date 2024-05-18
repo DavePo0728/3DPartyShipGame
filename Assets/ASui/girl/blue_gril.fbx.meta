@@ -7,18 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Mouth
-    second: {fileID: 2100000, guid: 306690f1ca9decd4bbf131ec58b251aa, type: 2}
+      name: Mouth.001
+    second: {fileID: 2100000, guid: 3e4f190afe23b6441b1177d1abf2e6c0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bady
-    second: {fileID: 2100000, guid: 916e6fe3f10308d479495171ec92a49e, type: 2}
+      name: bady.001
+    second: {fileID: 2100000, guid: 930f357caabc3b04b9db3baabc1fdb7f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: top
-    second: {fileID: 2100000, guid: 7c42e538fdc5c82468cf44c7897d00d8, type: 2}
+      name: top.001
+    second: {fileID: 2100000, guid: f3195d3219712ec43aac00ea284aafda, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -91,7 +91,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
