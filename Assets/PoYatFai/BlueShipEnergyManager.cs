@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class BlueShipEnergyManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class BlueShipEnergyManager : MonoBehaviour
     float currentEnergy;
     [SerializeField]
     Image p2EnergyUI;
+    Color p2EnergyUIColor;
     [SerializeField]
     GameObject energyBar;
     [SerializeField]
@@ -24,12 +26,24 @@ public class BlueShipEnergyManager : MonoBehaviour
         currentEnergy = 25;
         UpdateEnergyUI();
         superMode = false;
+        p2EnergyUIColor=p2EnergyUI.color;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void SuperModeInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (currentEnergy >= MaxEnergy)
+            {
+                StartCoroutine(SuperMode());
+
+            }
+        }
     }
     public void GetEnergy(GameObject target)
     {
@@ -42,11 +56,6 @@ public class BlueShipEnergyManager : MonoBehaviour
             currentEnergy += 5;
         }
         UpdateEnergyUI();
-        if (currentEnergy >= MaxEnergy)
-        {
-            StartCoroutine(SuperMode());
-            currentEnergy = 0;
-        }
     }
 
     private void UpdateEnergyUI()
@@ -74,10 +83,12 @@ public class BlueShipEnergyManager : MonoBehaviour
             currentEnergy -= 5;
             Instantiate(energyBar, transform.position, Quaternion.identity);
         }
+        UpdateEnergyUI();
     }
     IEnumerator SuperMode()
     {
         superMode = true;
+        currentEnergy = 0;
         float time = 0f;
         Vector3 initialScale = transform.localScale;
         blueShipAttack.superAttack = true;
@@ -90,6 +101,7 @@ public class BlueShipEnergyManager : MonoBehaviour
             yield return null;
         }
         transform.localScale = targetScale;
+        StartCoroutine(StartCountdown());
         yield return new WaitForSeconds(5f);
         time = 0f;
         initialScale = transform.localScale;
@@ -103,5 +115,23 @@ public class BlueShipEnergyManager : MonoBehaviour
         }
         blueShipAttack.superAttack = false;
         superMode = false;
+        p2EnergyUI.color = p2EnergyUIColor;
+    }
+    IEnumerator StartCountdown()
+    {
+        float duration = 5f;
+        float totalTime = 0;
+        float startTime = Time.time;
+
+        while (totalTime <= duration)
+        {
+            totalTime = Time.time - startTime;
+            float currentValue = MaxEnergy * (1 - totalTime / duration);
+            float temp = currentValue / MaxEnergy;
+            p2EnergyUI.fillAmount = temp;
+            float hueValue = Mathf.Lerp(122f / 360f, 0f, totalTime / duration);
+            p2EnergyUI.color = Color.HSVToRGB(hueValue, 1, 1);
+            yield return null;
+        }
     }
 }

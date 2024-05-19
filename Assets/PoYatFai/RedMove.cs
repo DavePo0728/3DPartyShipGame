@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class RedMove : MonoBehaviour
 {
@@ -21,10 +22,12 @@ public class RedMove : MonoBehaviour
     bool canDash = true;
     bool isDashing = false;
     float dashingTime = 0.2f;
-    float dashCooldown = 1f;
+    float dashCooldown = 3.3f;
     [SerializeField]
     float dashPushForce;
     bool redIsTouching = false;
+    [SerializeField]
+    Image DashUI;
     [SerializeField]
     float touchForce;
 
@@ -69,8 +72,23 @@ public class RedMove : MonoBehaviour
         shipRed.AddForce(shipRed.velocity * dashForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
+        StartCoroutine(StartCountdown());
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+    IEnumerator StartCountdown()
+    {
+        float duration = dashCooldown;
+        float totalTime = 0;
+        float startTime = Time.time;
+
+        while (totalTime <= duration)
+        {
+            totalTime = Time.time - startTime;
+            float currentValue = totalTime / duration;
+            DashUI.fillAmount = currentValue;
+            yield return null;
+        }
     }
     IEnumerator OnTouch()
     {

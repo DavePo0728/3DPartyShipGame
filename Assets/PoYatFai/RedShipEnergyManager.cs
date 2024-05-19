@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class RedShipEnergyManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class RedShipEnergyManager : MonoBehaviour
     float currentEnergy;
     [SerializeField]
     Image p1EnergyUI;
+    Color p1EnergyUIColor;
     [SerializeField]
     GameObject energyBar;
     [SerializeField]
@@ -24,12 +26,24 @@ public class RedShipEnergyManager : MonoBehaviour
         currentEnergy = 95;
         superMode = false;
         UpdateEnergyUI();
+        p1EnergyUIColor = p1EnergyUI.color;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+    public void SuperModeInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (currentEnergy >= MaxEnergy)
+            {
+                StartCoroutine(SuperMode());
+                
+            }
+        }
     }
     public void GetEnergy(GameObject target)
     {
@@ -43,11 +57,7 @@ public class RedShipEnergyManager : MonoBehaviour
             currentEnergy += 5;
         }
         UpdateEnergyUI();
-        if(currentEnergy >= MaxEnergy)
-        {
-            StartCoroutine(SuperMode());
-            currentEnergy = 0;
-        }
+        
     }
     private void UpdateEnergyUI()
     {
@@ -76,11 +86,12 @@ public class RedShipEnergyManager : MonoBehaviour
             Instantiate(energyBar, transform.position, Quaternion.identity);
 
         }
-
+        UpdateEnergyUI();
     }
     IEnumerator SuperMode()
     {
         superMode = true;
+        currentEnergy = 0;
         float time = 0f;
         Vector3 initialScale = transform.localScale;
         redShipAttack.superAttack = true;
@@ -93,6 +104,7 @@ public class RedShipEnergyManager : MonoBehaviour
             yield return null;
         }
         transform.localScale = targetScale;
+        StartCoroutine(StartCountdown());
         yield return new WaitForSeconds(5f);
         time = 0f;
         initialScale = transform.localScale;
@@ -104,7 +116,26 @@ public class RedShipEnergyManager : MonoBehaviour
             transform.localScale = Vector3.Lerp(initialScale, originScale, t);
             yield return null;
         }
+        
         redShipAttack.superAttack = false;
         superMode = false;
+        p1EnergyUI.color = p1EnergyUIColor;
+    }
+    IEnumerator StartCountdown()
+    {
+        float duration = 5f;
+        float totalTime = 0;
+        float startTime = Time.time;
+
+        while (totalTime <= duration)
+        {
+            totalTime = Time.time - startTime;
+            float currentValue = MaxEnergy * (1 - totalTime / duration);
+            float temp = currentValue / MaxEnergy;
+            p1EnergyUI.fillAmount = temp;
+            float hueValue = Mathf.Lerp(122f / 360f, 0f, totalTime / duration);
+            p1EnergyUI.color = Color.HSVToRGB(hueValue, 1, 1);
+            yield return null;
+        }
     }
 }

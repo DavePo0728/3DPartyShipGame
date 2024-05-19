@@ -41,10 +41,10 @@ public class ItemHit : MonoBehaviour
         gameManager = GameObject.Find("GameManager");
         shipHp = gameManager.GetComponent<GameManager>();
         currentHp = itemHp;
-        if (gameObject.tag== "Bomb")
-        {
+        //if (gameObject.tag== "Bomb")
+        //{
             BreakEffect = gameObject.GetComponent<AudioSource>();
-        }
+        //}
 
         if(canbeDestroy == true)
         {
