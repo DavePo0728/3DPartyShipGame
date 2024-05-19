@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f1c7e49dd098f4f88f7b5e4871dc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowSpeed: 0.7
+  flowSpeed: 0.6
 --- !u!114 &4109326387231624556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +149,4 @@ MonoBehaviour:
   damage: 0
   hpImage: {fileID: 0}
   explosionEffect: {fileID: 0}
+  BreakEffect: {fileID: 0}

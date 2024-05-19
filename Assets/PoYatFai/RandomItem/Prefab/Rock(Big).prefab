@@ -149,3 +149,4 @@ MonoBehaviour:
   damage: 0
   hpImage: {fileID: 0}
   explosionEffect: {fileID: 0}
+  BreakEffect: {fileID: 0}

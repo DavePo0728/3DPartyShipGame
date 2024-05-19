@@ -17,6 +17,8 @@ public class EnergyBarMove : MonoBehaviour
     int resolution;
     Vector3[] path;
     Collider barCollider;
+    [SerializeField]
+    ItemMove itemMove;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +31,12 @@ public class EnergyBarMove : MonoBehaviour
 
         this.gameObject.transform.DOPath(path, 0.8f).SetEase(Ease.Linear);
         Invoke("EnableCollider", 1.0f);
+        itemMove = GetComponent<ItemMove>();
     }
     void EnableCollider()
     {
         barCollider.enabled = true;
+        itemMove.enabled = true;
     }
     // Update is called once per frame
     void Update()

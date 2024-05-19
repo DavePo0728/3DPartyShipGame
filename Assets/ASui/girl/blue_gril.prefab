@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5586112957334717881}
   - component: {fileID: 2113140571940982190}
   m_Layer: 0
-  m_Name: "\u7ACB\u65B9\u9AD4.046"
+  m_Name: headphone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4990270529592780752}
   - component: {fileID: 308255723771235121}
   m_Layer: 0
-  m_Name: "\u5E73\u9762.009"
+  m_Name: hair2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,12 +109,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576394617826383936}
   m_LocalRotation: {x: -0.7071069, y: 0.00000008429365, z: 0.00000008429372, w: 0.7071067}
-  m_LocalPosition: {x: 0.000000006422167, y: 0.22065972, z: -0.012518256}
+  m_LocalPosition: {x: 0, y: 0.22065972, z: -0.012518256}
   m_LocalScale: {x: 0.10774608, y: 0.10774612, z: 0.10774612}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6299402149635844013}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4990270529592780752
 MeshFilter:
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 5570750727537941735}
   - component: {fileID: 875357345519160672}
   m_Layer: 0
-  m_Name: OL_Sumire_Original_Body.005
+  m_Name: eyelid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 1213506148513659021}
   - component: {fileID: 4885898041500432460}
   m_Layer: 0
-  m_Name: OL_Sumire_Original_Body.002
+  m_Name: eyelash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 5828011531519104060}
   - component: {fileID: 5828011531519104063}
   m_Layer: 0
-  m_Name: "\u5E73\u9762.009"
+  m_Name: hair2_outilne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,7 +363,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5828011532039285960}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5828011531519104060
 MeshFilter:
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 5828011532012574552}
   - component: {fileID: 5828011532012574555}
   m_Layer: 0
-  m_Name: "\u7ACB\u65B9\u9AD4.047"
+  m_Name: hat_outilne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -526,8 +526,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5828011531519104062}
   - {fileID: 5828011532623704993}
+  - {fileID: 5828011531519104062}
   - {fileID: 5828011532671392657}
   - {fileID: 5828011532012574554}
   - {fileID: 6299402150563257827}
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 5828011532623705007}
   - component: {fileID: 5828011532623705006}
   m_Layer: 0
-  m_Name: "\u7403\u9AD4.003"
+  m_Name: hair1_outilne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -565,7 +565,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5828011532039285960}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5828011532623705007
 MeshFilter:
@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 5828011532671392671}
   - component: {fileID: 5828011532671392670}
   m_Layer: 0
-  m_Name: "\u7ACB\u65B9\u9AD4.046"
+  m_Name: headphone_outilne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,8 +732,8 @@ Transform:
   m_Children:
   - {fileID: 8641647704490264184}
   - {fileID: 2367196548309582361}
-  - {fileID: 2722492322646817898}
   - {fileID: 2740064275859429597}
+  - {fileID: 2722492322646817898}
   - {fileID: 1534026985763091522}
   - {fileID: 106728015328946252}
   - {fileID: 5828011532039285960}
@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 5532587155275111502}
   - component: {fileID: 5419500338686078361}
   m_Layer: 0
-  m_Name: "\u7ACB\u65B9\u9AD4.047"
+  m_Name: hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 8202013229900439099}
   - component: {fileID: 2944653019073369807}
   m_Layer: 0
-  m_Name: "\u7403\u9AD4.003"
+  m_Name: hair1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,7 +905,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6299402149635844013}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8202013229900439099
 MeshFilter:
@@ -1030,7 +1030,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9b1ddd05dd3b9784f884efa63438a8e3, type: 2}
     - target: {fileID: 919132149155446097, guid: 791127002e80eb54d8a2270ff6e01145, type: 3}
       propertyPath: m_Name
-      value: blue_gril_outline
+      value: body_outline
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 791127002e80eb54d8a2270ff6e01145, type: 3}
