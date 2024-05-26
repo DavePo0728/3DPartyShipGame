@@ -12,6 +12,8 @@ public class BlueMove : MonoBehaviour
     GameManager shipHp;
     [SerializeField]
     GameObject p2SpawnPoint;
+    [SerializeField]
+    Attack blueShipAttack;
     //Move
     [SerializeField]
     float speed;
@@ -117,7 +119,7 @@ public class BlueMove : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             StartCoroutine(OnTouch());
-            if (blueIsTouching)
+            if (blueIsTouching && !isDashing)
             {
                 Rigidbody othership;
                 othership = collision.gameObject.GetComponent<Rigidbody>();
@@ -125,7 +127,7 @@ public class BlueMove : MonoBehaviour
                 Vector3 temp1 = Vector3.ClampMagnitude(-shipBlue.velocity * touchForce, -touchForce);
                 othership.AddForce(temp, ForceMode.Impulse);
                 shipBlue.AddForce(temp1, ForceMode.Impulse);
-                Debug.Log("Bluetouch");
+                //Debug.Log("Bluetouch");
             }
             if (blueIsTouching&&isDashing)
             {
@@ -134,26 +136,40 @@ public class BlueMove : MonoBehaviour
                 Vector3 temp = Vector3.ClampMagnitude(shipBlue.velocity * dashPushForce, dashPushForce);
                 othership.AddForce(temp, ForceMode.Impulse);
                 redEnergyManager.DropEnergy();
-                Debug.Log("BlueDashtouch");
+                //Debug.Log("BlueDashtouch");
 
             }
         }   
     }
     private void OnTriggerEnter(Collider other)
     {
-            if (other.gameObject.tag == "Bullet")
-            {
-                shipHp.GetHit(this.gameObject, 10);
-                Destroy(other.gameObject);
-            }
-            if (other.gameObject.tag == "Respawn")
-            {
-                RespawnPlayer(gameObject);
-            }
-            if (other.gameObject.tag == "EnergyBar")
-            {
-                blueEnergyManager.GetEnergy(other.gameObject);
-                Destroy(other.gameObject);
-            }
+        if (other.gameObject.tag == "torpedo")
+        {
+            shipHp.GetHit(this.gameObject, 50);
+        }
+        if (other.gameObject.tag == "Bullet")
+        {
+            shipHp.GetHit(this.gameObject, 10);
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Respawn")
+        {
+            RespawnPlayer(gameObject);
+        }
+        if (other.gameObject.tag == "EnergyBar")
+        {
+            blueEnergyManager.GetEnergy(other.gameObject);
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag == "Equipment"&& blueShipAttack.returnSpecialWeapon())
+        {
+            blueShipAttack.getEquipment(0);
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag == "Equipment1"&& blueShipAttack.returnSpecialWeapon())
+        {
+            blueShipAttack.getEquipment(1);
+            Destroy(other.gameObject);
+        }
     }
 }

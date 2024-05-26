@@ -11,6 +11,8 @@ public class RedMove : MonoBehaviour
     GameManager shipHp;
     [SerializeField]
     GameObject p1SpawnPoint;
+    [SerializeField]
+    Attack redShipAttack;
     //Move
     [SerializeField]
     float speed;
@@ -34,6 +36,8 @@ public class RedMove : MonoBehaviour
     RedShipEnergyManager redEnergyManager;
     [SerializeField]
     BlueShipEnergyManager blueEnergyManager;
+    [SerializeField]
+    AudioSource getEnergySound;
 
     void Start()
     {
@@ -43,7 +47,6 @@ public class RedMove : MonoBehaviour
     public void GetMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-        //Debug.Log(movementInput.x + "+" + movementInput.y);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -114,7 +117,7 @@ public class RedMove : MonoBehaviour
         if(collision.gameObject.tag == "Player2")
         {
             StartCoroutine(OnTouch());
-            if (redIsTouching)
+            if (redIsTouching && !isDashing)
             {
                 Rigidbody othership;
                 othership = collision.gameObject.GetComponent<Rigidbody>();
@@ -122,7 +125,7 @@ public class RedMove : MonoBehaviour
                 Vector3 temp1 = Vector3.ClampMagnitude(-shipRed.velocity * touchForce, -touchForce);
                 othership.AddForce(temp, ForceMode.Impulse);
                 shipRed.AddForce(temp1, ForceMode.Impulse);
-                Debug.Log("Redtouch");
+                //Debug.Log("Redtouch");
             }
             if (redIsTouching&&isDashing)
             {
@@ -131,7 +134,7 @@ public class RedMove : MonoBehaviour
                 Vector3 temp = Vector3.ClampMagnitude(shipRed.velocity * dashPushForce, dashPushForce);
                 othership.AddForce(temp, ForceMode.Impulse);
                 blueEnergyManager.DropEnergy();
-                Debug.Log("RedDashtouch");
+                //Debug.Log("RedDashtouch");
 
             }
         }
@@ -139,19 +142,33 @@ public class RedMove : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-            if (other.gameObject.tag == "Bullet1")
-            {
-                shipHp.GetHit(this.gameObject, 10);
-                Destroy(other.gameObject);
-            }
-            if (other.gameObject.tag == "Respawn")
-            {
-                RespawnPlayer(gameObject);
-            }
-            if (other.gameObject.tag == "EnergyBar")
-            {
-                redEnergyManager.GetEnergy(other.gameObject);
-                Destroy(other.gameObject);
-            }
+        if (other.gameObject.tag == "torpedo1")
+        {
+            shipHp.GetHit(this.gameObject, 50);
+        }
+        if (other.gameObject.tag == "Bullet1")
+        {
+            shipHp.GetHit(this.gameObject, 10);
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Respawn")
+        {
+            RespawnPlayer(gameObject);
+        }
+        if (other.gameObject.tag == "EnergyBar")
+        {
+            redEnergyManager.GetEnergy(other.gameObject);
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag == "Equipment"&& redShipAttack.returnSpecialWeapon())
+        {
+            redShipAttack.getEquipment(0);
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag == "Equipment1"&& redShipAttack.returnSpecialWeapon())
+        {
+            redShipAttack.getEquipment(1);
+            Destroy(other.gameObject);
+        }
     }
 }

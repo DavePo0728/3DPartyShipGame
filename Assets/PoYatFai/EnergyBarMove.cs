@@ -5,9 +5,12 @@ using DG.Tweening;
 
 public class EnergyBarMove : MonoBehaviour
 {
-   // LineRenderer debugLine;
+    // LineRenderer debugLine;
+
     Vector3 startPoint;
+
     Vector3 endPoint;
+
     Vector3 bezierControlPoint;
     [SerializeField]
     float curveHeight;
@@ -29,7 +32,7 @@ public class EnergyBarMove : MonoBehaviour
         //debugLine.positionCount = path.Length;
       //  debugLine.SetPositions(path);
 
-        this.gameObject.transform.DOPath(path, 0.8f).SetEase(Ease.Linear);
+        gameObject.transform.DOPath(path, 0.8f).SetEase(Ease.Linear);
         Invoke("EnableCollider", 1.0f);
         itemMove = GetComponent<ItemMove>();
     }
@@ -45,7 +48,7 @@ public class EnergyBarMove : MonoBehaviour
     }
     void SetPosition()
     {
-        startPoint = transform.position;
+        startPoint = gameObject.transform.position;
         endPoint = GetLandingPos();
         bezierControlPoint = (startPoint + endPoint) * 0.5f + (Vector3.up * curveHeight);
     }
@@ -63,6 +66,7 @@ public class EnergyBarMove : MonoBehaviour
         {
             var t = (i + 1) / (float)resolution;
             path[i] = GetBezierPoint(t, startPoint, bezierControlPoint, endPoint);
+            //Debug.Log(path[i]);
         }
     }
     static Vector3 GetBezierPoint(float t, Vector3 start, Vector3 center, Vector3 end)

@@ -15,5 +15,4 @@ public class BulletMove : MonoBehaviour
         transform.Translate(-Vector3.forward*bulletSpeed*Time.deltaTime);
         Destroy(this.gameObject, lifeTime);
     }
-    
 }

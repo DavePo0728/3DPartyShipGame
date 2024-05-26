@@ -52,7 +52,6 @@ public class RandomItemManager : MonoBehaviour
         {
             GameObject itemToSpawn = GetRandomGameObject();
             Instantiate(itemToSpawn, GetRandomPosition(), Quaternion.identity);
-            //Debug.Log(timeInterval);
             yield return new WaitForSeconds(timeInterval);
         }
         totalSpawnQuantity = 22;
@@ -137,7 +136,7 @@ public class RandomItemManager : MonoBehaviour
     {
         do
         {
-            spawnPointNum = Random.Range(0, 14); 
+            spawnPointNum = Random.Range(0, 13); 
         } while (spawnPointNum == lastSpawnPointNum);
 
         lastSpawnPointNum = spawnPointNum;

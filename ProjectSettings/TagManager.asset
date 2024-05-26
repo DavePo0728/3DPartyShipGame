@@ -11,6 +11,10 @@ TagManager:
   - EnergyBar
   - Equipment
   - Bomb
+  - Wood
+  - Equipment1
+  - TorpedoTurret
+  - Torpedo1
   layers:
   - Default
   - TransparentFX

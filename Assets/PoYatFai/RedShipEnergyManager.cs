@@ -20,6 +20,8 @@ public class RedShipEnergyManager : MonoBehaviour
     Vector3 originScale = new Vector3(0.8f, 0.8f, 0.8f);
     float duration = 1.0f;
     bool superMode;
+    [SerializeField]
+    AudioSource energySound;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,12 +29,12 @@ public class RedShipEnergyManager : MonoBehaviour
         superMode = false;
         UpdateEnergyUI();
         p1EnergyUIColor = p1EnergyUI.color;
+        energySound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
     public void SuperModeInput(InputAction.CallbackContext context)
     {
@@ -54,7 +56,11 @@ public class RedShipEnergyManager : MonoBehaviour
         }
         if (target.tag == "EnergyBar")
         {
-            currentEnergy += 5;
+            if (currentEnergy <= 100)
+            {
+                currentEnergy += 5;
+                energySound.PlayOneShot(Resources.Load<AudioClip>("GetEnergy"));
+            }
         }
         UpdateEnergyUI();
         
@@ -90,6 +96,7 @@ public class RedShipEnergyManager : MonoBehaviour
     }
     IEnumerator SuperMode()
     {
+        energySound.PlayOneShot(Resources.Load<AudioClip>("superModSE"));
         superMode = true;
         currentEnergy = 0;
         float time = 0f;
@@ -107,6 +114,7 @@ public class RedShipEnergyManager : MonoBehaviour
         StartCoroutine(StartCountdown());
         yield return new WaitForSeconds(5f);
         time = 0f;
+        energySound.PlayOneShot(Resources.Load<AudioClip>("SuperModOff"));
         initialScale = transform.localScale;
         while (time < duration)
         {

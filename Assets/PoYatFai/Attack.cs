@@ -29,7 +29,7 @@ public class Attack : MonoBehaviour
     [SerializeField]
     GameObject specialWeapon;
     [SerializeField]
-    GameObject currentSpecialWeapon;
+    public GameObject currentSpecialWeapon;
 
     [SerializeField]
     GameObject TorpedoShootingPoint;
@@ -107,12 +107,11 @@ public class Attack : MonoBehaviour
             {
                 canonAttack = true;
                 turretBase = canon;
-            } else if (turretBase == canon)
+            } else if (turretBase == canon&&currentSpecialWeapon !=null)
             {
                 turretBase = specialWeapon;
                 canonAttack = false;
             }
-            //Debug.Log(turretBase.name);
         }
     }
     public void CanonAttack(InputAction.CallbackContext context)
@@ -127,15 +126,48 @@ public class Attack : MonoBehaviour
     }
     public void SpecialWeaponAttack(InputAction.CallbackContext context)
     {
-        if (canonAttack==false&&context.performed&&currentSpecialWeapon == specialWeaponList[3]) {
-            if (torpedoRemain > 0)
+        if (canonAttack==false&&context.performed&&currentSpecialWeapon!=null) {
+            if (currentSpecialWeapon.tag == "TorpedoTurret")
             {
-                TorpedoList[torpedoRemain - 1].transform.position = TorpedoShootingPoint.transform.position;
-                TorpedoList[torpedoRemain - 1].transform.parent = null;
-                TorpedoAttack tp=TorpedoList[torpedoRemain - 1].GetComponent<TorpedoAttack>();
-                tp.enabled = true;
-                torpedoRemain--;
+                if (torpedoRemain > 0)
+                {
+                    TorpedoList[torpedoRemain - 1].transform.position = TorpedoShootingPoint.transform.position;
+                    TorpedoList[torpedoRemain - 1].transform.parent = null;
+                    RedTorpedoAttack tp = TorpedoList[torpedoRemain - 1].GetComponent<RedTorpedoAttack>();
+                    BlueTorpedoAttack tp1 = TorpedoList[torpedoRemain - 1].GetComponent<BlueTorpedoAttack>();
+                    if (tp != null)
+                        tp.enabled = true;
+                    if (tp1 != null)
+                        tp1.enabled = true;
+                    Collider collider = TorpedoList[torpedoRemain - 1].GetComponent<Collider>();
+                    collider.enabled = true;
+                    torpedoRemain--;
+                }
+                if (torpedoRemain <= 0)
+                {
+                    Destroy(currentSpecialWeapon);
+                    torpedoRemain = 3;
+                    canonAttack = true;
+                    turretBase = canon;
+                }
             }
+        }
+    }
+    public bool returnSpecialWeapon()
+    {
+        bool noWeapon = false;
+        noWeapon = currentSpecialWeapon == null ? true : false;
+        return noWeapon;
+    }
+    public void getEquipment(int equipmentNumber)
+    {
+        currentSpecialWeapon = Instantiate(specialWeaponList[equipmentNumber], specialWeapon.transform);
+        
+        if(currentSpecialWeapon.tag == "TorpedoTurret")
+        {
+            TorpedoList[0] = currentSpecialWeapon.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
+            TorpedoList[1] = currentSpecialWeapon.transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
+            TorpedoList[2] = currentSpecialWeapon.transform.GetChild(2).GetChild(0).GetChild(0).gameObject;
         }
     }
 }

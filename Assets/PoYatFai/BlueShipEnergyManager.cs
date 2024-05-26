@@ -65,8 +65,10 @@ public class BlueShipEnergyManager : MonoBehaviour
     }
     public void DropEnergy()
     {
+        Debug.Log("rf");
         if (currentEnergy >= 15)
         {
+            Debug.Log(transform.position);
             currentEnergy -= 15;
             Instantiate(energyBar, transform.position, Quaternion.identity);
             Instantiate(energyBar, transform.position, Quaternion.identity);
@@ -74,12 +76,14 @@ public class BlueShipEnergyManager : MonoBehaviour
         }
         else if (currentEnergy <= 14 && currentEnergy >= 10)
         {
+            Debug.Log("10");
             currentEnergy -= 10;
             Instantiate(energyBar, transform.position, Quaternion.identity);
             Instantiate(energyBar, transform.position, Quaternion.identity);
         }
         else if (currentEnergy <= 9 && currentEnergy >= 5)
         {
+            Debug.Log("5");
             currentEnergy -= 5;
             Instantiate(energyBar, transform.position, Quaternion.identity);
         }

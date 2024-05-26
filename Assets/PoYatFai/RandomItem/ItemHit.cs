@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class ItemHit : MonoBehaviour
 {
-    [SerializeField]
+    ItemMove itemMove;
+    GameObject expolsionEffect;
     Transform cameraTransform;
     [SerializeField]
     bool canbeDestroy;
@@ -30,10 +31,19 @@ public class ItemHit : MonoBehaviour
     BlueShipEnergyManager BlueEnergyManager;
 
     [SerializeField]
-    AudioSource BreakEffect;
+    AudioSource breakSound;
+    [SerializeField]
+    GameObject[] randomEquipment;
+    [SerializeField]
+    float[] dropRate;
 
     private void Start()
     {
+        if(gameObject.tag == "Bomb"|| gameObject.tag == "Wood")
+        {
+            explosionEffect = gameObject.transform.GetChild(2).gameObject;
+            itemMove = gameObject.GetComponent<ItemMove>();
+        }
         RedShip = GameObject.FindGameObjectWithTag("Player");
         BlueShip = GameObject.FindGameObjectWithTag("Player2");
         RedEnergyManager = RedShip.GetComponent<RedShipEnergyManager>();
@@ -41,10 +51,7 @@ public class ItemHit : MonoBehaviour
         gameManager = GameObject.Find("GameManager");
         shipHp = gameManager.GetComponent<GameManager>();
         currentHp = itemHp;
-        //if (gameObject.tag== "Bomb")
-        //{
-            BreakEffect = gameObject.GetComponent<AudioSource>();
-        //}
+            breakSound = gameObject.GetComponent<AudioSource>();
 
         if(canbeDestroy == true)
         {
@@ -75,10 +82,20 @@ public class ItemHit : MonoBehaviour
                 UpdateUI();
                 if (currentHp <= 0)
                 {
-                    
-                    if (BreakEffect != null)
+                    if(gameObject.tag == "Bomb" || gameObject.tag == "Wood")
                     {
-                        BreakEffect.Play();
+                        itemMove.enabled = false;
+                        explosionEffect.SetActive(true);
+                    }
+                    if(gameObject.tag == "Wood")
+                    {
+                        GameObject itemToSpawn = GetRandomGameObject();
+                        if(itemToSpawn!=null)
+                        Instantiate(itemToSpawn, transform.position, Quaternion.identity);
+                    }
+                    if (breakSound != null)
+                    {
+                        breakSound.Play();
                         Collider hitbox = gameObject.GetComponent<Collider>();
                         GameObject child = gameObject.transform.GetChild(0).gameObject;
                         GameObject child1 = gameObject.transform.GetChild(1).gameObject;
@@ -86,7 +103,7 @@ public class ItemHit : MonoBehaviour
                         child1.SetActive(false);
                         hitbox.enabled = false;
                     }
-                    Invoke("InvokeDestroy", 0.6f);
+                    Destroy(gameObject, 0.6f);
                     if (haveEnergy == true)
                     {
                         RedEnergyManager.GetEnergy(other.gameObject);
@@ -105,13 +122,18 @@ public class ItemHit : MonoBehaviour
                 UpdateUI();
                 if (currentHp <= 0)
                 {
+                    if (gameObject.tag == "Bomb")
+                    {
+                        itemMove.enabled = false;
+                        explosionEffect.SetActive(true);
+                    }
                     if (haveEnergy == true)
                     {
                         BlueEnergyManager.GetEnergy(other.gameObject);
                     }
-                    if (BreakEffect != null)
+                    if (breakSound != null)
                     {
-                        BreakEffect.Play();
+                        breakSound.Play();
                         Collider hitbox = gameObject.GetComponent<Collider>();
                         GameObject child = gameObject.transform.GetChild(0).gameObject;
                         GameObject child1 = gameObject.transform.GetChild(1).gameObject;
@@ -119,11 +141,10 @@ public class ItemHit : MonoBehaviour
                         child1.SetActive(false);
                         hitbox.enabled = false;
                     }
-                    Invoke("InvokeDestroy", 0.6f);
+                    Destroy(gameObject, 0.6f);
                     if (haveEnergy == true)
                     {
                         BlueEnergyManager.GetEnergy(other.gameObject);
-                        Debug.Log("getEnergy");
                     }
                 }
                 
@@ -139,31 +160,47 @@ public class ItemHit : MonoBehaviour
         }
         
     }
+    GameObject GetRandomGameObject()
+    {
+        int totalWeight = 100;
+
+        int randomNumber = Random.Range(1, totalWeight);
+        Debug.Log(randomNumber);
+        for (int i = 0; i < dropRate.Length; i++)
+        {
+            if (randomNumber < dropRate[i])
+            {
+                return randomEquipment[i];
+            }
+        }
+
+        return null; // Should never happen
+    }
     private void OnCollisionEnter(Collision other)
     {
-        if (destroyByShip == true && this.gameObject.tag != "Equipment")
+        if (destroyByShip == true)
         {
             if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
             {
+                if (gameObject.tag == "Bomb")
+                {
+                    itemMove.enabled = false;
+                    explosionEffect.SetActive(true);
+                }
                 shipHp.GetHit(other.gameObject, damage);
-                Destroy(this.gameObject);
+                if (breakSound != null)
+                {
+                    breakSound.Play();
+                    Collider hitbox = gameObject.GetComponent<Collider>();
+                    GameObject child = gameObject.transform.GetChild(0).gameObject;
+                    GameObject child1 = gameObject.transform.GetChild(1).gameObject;
+                    child.SetActive(false);
+                    child1.SetActive(false);
+                    hitbox.enabled = false;
+                }
+                Destroy(gameObject, 0.6f);
             }
         }
-        if (destroyByShip == true && this.gameObject.tag == "Equipment")
-        {
-            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Player2")
-            {
-                Destroy(this.gameObject);
-            }
-            if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet1")
-            {
-                Destroy(other.gameObject);
-            }
-        }
-    }
-    void InvokeDestroy()
-    {
-        Destroy(this.gameObject);
     }
     void UpdateUI()
     {
